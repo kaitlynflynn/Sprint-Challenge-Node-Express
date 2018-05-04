@@ -5,6 +5,10 @@ const db = require('../data/helpers/actionModel');
 
 // POST (add data) //Postman Test ok: http://localhost:5000/api/actions (able to created new TEST with ID 4)
 router.post('/', (req, res) => {
+    const {project_id, description, notes} = req.body;
+        if ((notes.length === 0) || description.length === 0 || description.length > 128 || !(typeof descriptioin === 'string') || !(typeof notes === 'string') || !(typeof project_id === 'number')) {
+            res.status(404).json({ errorMsg: 'Description must be under 128 characters.' })
+        } else
     db
     .insert(req.body)
     .then(response => {
@@ -47,8 +51,23 @@ router.get('/:id', (req, res) => {
     });
 });
 
+//GET (endpoint for actions) 
+router.get('/:id/actions', (req, res) => {
+    const id = req.params.id;
+    db
+    .get(id)
+    .then(response => {
+      res.json(response.actions);
+    })
+    //If there's an error in retrieving the data from the database
+    .catch(err => {
+      res.status(500).json({ ErrorMsg: 'Sorry - Data could not be found.' });
+    });
+});
+
 // PUT (update) //Postman Test ok: http://localhost:5000/api/actions/4 (Able to successfully update ID 4)
 router.put('/:id', function(req, res) {
+    const { project_id, description, notes } = req.body;
     const id = req.params.id;
     db
     .update(id, req.body)

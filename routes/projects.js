@@ -5,6 +5,10 @@ const db = require('../data/helpers/projectModel');
 
 // POST (add data) //Postman Test ok: http://localhost:5000/api/projects
 router.post('/', (req, res) => {
+    const {project_id, description, notes} = req.body;
+        if ((notes.length === 0) || description.length === 0 || description.length > 128 || !(typeof descriptioin === 'string') || !(typeof notes === 'string') || !(typeof project_id === 'number')) {
+            res.status(404).json({ errorMsg: 'Description must be under 128 characters.' })
+        } else
     db.insert(req.body)
     .then(response => {
         res.status(201).json(response);
