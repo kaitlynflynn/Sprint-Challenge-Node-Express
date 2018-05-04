@@ -3,7 +3,7 @@ const router = require('express').Router();
 const db = require('../data/helpers/projectModel');
 
 
-// POST (add data)
+// POST (add data) //Postman Test ok: http://localhost:5000/api/projects
 router.post('/', (req, res) => {
     db.insert(req.body)
     .then(response => {
@@ -11,14 +11,14 @@ router.post('/', (req, res) => {
     })
     .catch(err => {
         if (err.errno === 19) {
-        res.status(400).json({ msg: 'Please provide all required fields' });
+        res.status(400).json({ msg: 'Please provide all required fields.' });
         } else {
         res.status(500).json({ error: err });
         }
     });
 });
     
-// GET (retrieve data)
+// GET (retrieve data) //Postman Test ok: http://localhost:5000/api/projects
 router.get('/', (req, res) => {
     db
     .get()
@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
     });
 });
 
-//GET (retrieve by id)
+//GET (retrieve by id) //Postman Test ok: http://localhost:5000/api/projects/2 (created test with ID 2)
 router.get('/:id', (req, res) => {
     const id = req.params.id;
     db
@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
     });
 });
     
-// PUT (update project)
+// PUT (update project) //Postman Test ok: http://localhost:5000/api/projects/2 (Made update to Test ID 2)
 router.put('/:id', function(req, res) {
     const id = req.params.id;
     db
@@ -63,7 +63,7 @@ router.put('/:id', function(req, res) {
     });
 });
     
-// DELETE (remove data)
+// DELETE (remove data) //Postman Test ok: http://localhost:5000/api/projects/3 (Successully able to delete ID 3 I created)
 router.delete('/:id', function(req, res) {
     const id = req.params.id;
     db

@@ -3,7 +3,7 @@ const router = require('express').Router();
 const db = require('../data/helpers/actionModel');
 
 
-// POST (add data)
+// POST (add data) //Postman Test ok: http://localhost:5000/api/actions (able to created new TEST with ID 4)
 router.post('/', (req, res) => {
     db
     .insert(req.body)
@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// GET (retreive data)
+// GET (retreive data) //Postman Test ok: http://localhost:5000/api/actions/ 
 router.get('/', (req, res) => {
     db
     .get()
@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
     });
 });
 
-//GET (retrieve by id)
+//GET (retrieve by id) //Postman Test ok: http://localhost:5000/api/actions/2 
 router.get('/:id', (req, res) => {
     const id = req.params.id;
     db
@@ -47,7 +47,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// PUT (update)
+// PUT (update) //Postman Test ok: http://localhost:5000/api/actions/4 (Able to successfully update ID 4)
 router.put('/:id', function(req, res) {
     const id = req.params.id;
     db
@@ -65,7 +65,7 @@ router.put('/:id', function(req, res) {
     });
 });
 
-// DELETE (remove data)
+// DELETE (remove data) //Postman Test ok: http://localhost:5000/api/actions/5 (was able to successfully delete TEST post I made with ID 5)
 router.delete('/:id', function(req, res) {
     const id = req.params.id;
     db
