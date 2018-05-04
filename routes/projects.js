@@ -3,7 +3,7 @@ const router = require('express').Router();
 const db = require('../data/helpers/projectModel');
 
 
-// POST
+// POST (add data)
 router.post('/', (req, res) => {
     db.insert(req.body)
     .then(response => {
@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
     });
 });
     
-// GET
+// GET (retrieve data)
 router.get('/', (req, res) => {
     db
     .get()
@@ -63,7 +63,7 @@ router.put('/:id', function(req, res) {
     });
 });
     
-// DELETE
+// DELETE (remove data)
 router.delete('/:id', function(req, res) {
     const id = req.params.id;
     db
